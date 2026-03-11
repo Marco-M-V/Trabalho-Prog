@@ -79,5 +79,5 @@ Estruturas condicionais e de repetição
 Interação via terminal
 
 👨‍💻 Autores
-Raphael Castro - Marco Matheus 
+Raphael Castro - Marco Matheus;
 Projeto desenvolvido para fins acadêmicos e prática de programação.
