@@ -2,9 +2,11 @@
 #include <stdbool.h>
 #include <string.h>
 #include <locale.h>
+#include <stdlib.h>
+#include <time.h>
 
 // ============================================================
-// Funções auxiliares para trabalhar com strings
+// Funcoes auxiliares para trabalhar com strings
 // ============================================================
 
 int comparar_strings(char *s1, char *s2) {
@@ -32,7 +34,7 @@ int contar_caracteres(char *str) {
 }
 
 // ============================================================
-// Ordenação: Odd-Even Sort
+// Ordenacao: Odd-Even Sort
 // ============================================================
 
 void ordenar_elementos(int *arr, int tamanho) {
@@ -69,7 +71,7 @@ void ordenar_elementos(int *arr, int tamanho) {
 #define RESET    "\033[0m"
 
 // ============================================================
-// Utilitário: leitura segura de inteiro dentro de um intervalo
+// Utilitario: leitura segura de inteiro dentro de um intervalo
 // ============================================================
 
 int ler_inteiro(int minimo, int maximo) {
@@ -81,7 +83,7 @@ int ler_inteiro(int minimo, int maximo) {
         } else {
             while (getchar() != '\n');
         }
-        printf("Opção inválida. Digite um número entre %d e %d: ", minimo, maximo);
+        printf("Opcao invalida. Digite um numero entre %d e %d: ", minimo, maximo);
     }
 }
 
@@ -89,77 +91,165 @@ int ler_inteiro(int minimo, int maximo) {
 // Quiz de Engenharia
 // ============================================================
 
+#define TOTAL_QUESTOES      15
+#define QUESTOES_POR_RODADA  8
+
 void quiz_engenharia() {
     struct Pergunta {
-        char pergunta[150];
-        char opcoes[4][60];
+        char pergunta[200];
+        char opcoes[4][80];
         int  resposta_correta;
     };
 
-    struct Pergunta questoes[5] = {
+    struct Pergunta banco[TOTAL_QUESTOES] = {
         {
-            "Que tipo de linguagem está sendo usada?",
-            {"Java", "Python", "C", "Ruby"},
-            2
+            "Que tipo de linguagem esta sendo usada neste programa?",
+            {"Java", "Python", "C", "Ruby"}, 2
         },
         {
             "O que significa CPU?",
-            {
-                "Unidade Central de Processamento",
-                "Unidade de Processamento de Computadores",
-                "Processador Central de Unidade",
-                "Unidade Pessoal de Computador"
-            },
-            0
+            {"Unidade Central de Processamento",
+             "Unidade de Processamento de Computadores",
+             "Processador Central de Unidade",
+             "Unidade Pessoal de Computador"}, 0
         },
         {
-            "Qual NÃO é um tipo de dado em C?",
-            {"int", "float", "string", "double"},
-            2
+            "Qual NAO e um tipo de dado primitivo em C?",
+            {"int", "float", "string", "double"}, 2
         },
         {
-            "Qual protocolo é utilizado para sites?",
-            {"FTP", "HTTP", "SMTP", "UDP"},
-            1
+            "Qual protocolo e utilizado para acessar sites na web?",
+            {"FTP", "HTTP", "SMTP", "UDP"}, 1
         },
         {
-            "O que é um algoritmo?",
-            {"Dispositivo de hardware", "Linguagem de programação", "Conjunto de instruções", "Sistema operacional"},
-            2
+            "O que e um algoritmo?",
+            {"Dispositivo de hardware",
+             "Linguagem de programacao",
+             "Conjunto ordenado de instrucoes",
+             "Sistema operacional"}, 2
+        },
+        {
+            "Qual estrutura de dados segue o principio FIFO?",
+            {"Pilha", "Fila", "Arvore", "Grafo"}, 1
+        },
+        {
+            "O que significa RAM?",
+            {"Memoria de Acesso Aleatorio",
+             "Modulo de Acesso Rapido",
+             "Memoria de Armazenamento Remoto",
+             "Registro de Acesso a Maquina"}, 0
+        },
+        {
+            "Qual operador acessa membros de um ponteiro para struct em C?",
+            {".", "::", "->", ":"}, 2
+        },
+        {
+            "O que e um compilador?",
+            {"Hardware que executa programas",
+             "Programa que traduz codigo-fonte em executavel",
+             "Sistema operacional especializado",
+             "Tipo de banco de dados"}, 1
+        },
+        {
+            "Qual e a base numerica do sistema hexadecimal?",
+            {"2", "8", "10", "16"}, 3
+        },
+        {
+            "O que significa SQL?",
+            {"Linguagem de Consulta Simples",
+             "Linguagem de Consulta Estruturada",
+             "Sistema de Consulta Logica",
+             "Suporte de Qualidade Logica"}, 1
+        },
+        {
+            "Qual funcao em C aloca memoria dinamicamente?",
+            {"alloc()", "malloc()", "memalloc()", "new()"}, 1
+        },
+        {
+            "O que e recursao em programacao?",
+            {"Loop infinito",
+             "Funcao que chama a si mesma",
+             "Tipo de variavel global",
+             "Estrutura de dados linear"}, 1
+        },
+        {
+            "Qual e a complexidade do algoritmo de busca binaria?",
+            {"O(n)", "O(n^2)", "O(log n)", "O(1)"}, 2
+        },
+        {
+            "O que e um sistema operacional?",
+            {"Programa antivirus",
+             "Hardware de armazenamento",
+             "Software que gerencia recursos do computador",
+             "Linguagem de programacao de baixo nivel"}, 2
         }
     };
 
+    // Embaralha o banco de questoes (Fisher-Yates)
+    for (int i = TOTAL_QUESTOES - 1; i > 0; i--) {
+        int j = rand() % (i + 1);
+        struct Pergunta tmp = banco[i];
+        banco[i] = banco[j];
+        banco[j] = tmp;
+    }
+
     int pontos = 0;
     printf(AMARELO "\n=== QUIZ DE ENGENHARIA ===\n" RESET);
+    printf("Respondendo %d perguntas sorteadas (banco de %d).\n",
+           QUESTOES_POR_RODADA, TOTAL_QUESTOES);
 
-    for (int i = 0; i < 5; i++) {
-        printf("\nPergunta %d: %s\n", i + 1, questoes[i].pergunta);
+    for (int i = 0; i < QUESTOES_POR_RODADA; i++) {
+        struct Pergunta *q = &banco[i];
+
+        // Salva a resposta correta antes de embaralhar as opcoes
+        char correta[80];
+        copiar_string(correta, q->opcoes[q->resposta_correta]);
+
+        // Embaralha as opcoes (Fisher-Yates)
+        for (int k = 3; k > 0; k--) {
+            int m = rand() % (k + 1);
+            char tmp[80];
+            copiar_string(tmp,          q->opcoes[k]);
+            copiar_string(q->opcoes[k], q->opcoes[m]);
+            copiar_string(q->opcoes[m], tmp);
+        }
+
+        // Atualiza indice da resposta correta apos embaralhamento
+        for (int k = 0; k < 4; k++) {
+            if (comparar_strings(q->opcoes[k], correta)) {
+                q->resposta_correta = k;
+                break;
+            }
+        }
+
+        printf(AZUL "\nPergunta %d/%d:" RESET " %s\n",
+               i + 1, QUESTOES_POR_RODADA, q->pergunta);
         for (int j = 0; j < 4; j++) {
-            printf("  %d) %s\n", j + 1, questoes[i].opcoes[j]);
+            printf("  %d) %s\n", j + 1, q->opcoes[j]);
         }
 
         printf("Sua resposta (1-4): ");
         int resposta = ler_inteiro(1, 4);
 
-        if (resposta - 1 == questoes[i].resposta_correta) {
+        if (resposta - 1 == q->resposta_correta) {
             printf(VERDE "Resposta correta!\n" RESET);
             pontos++;
         } else {
-            printf(VERMELHO "Errado! A resposta certa é: %d) %s\n" RESET,
-                   questoes[i].resposta_correta + 1,
-                   questoes[i].opcoes[questoes[i].resposta_correta]);
+            printf(VERMELHO "Errado! A resposta certa e: %d) %s\n" RESET,
+                   q->resposta_correta + 1,
+                   q->opcoes[q->resposta_correta]);
         }
     }
 
-    printf(AMARELO "\nSua pontuação final: %d/5\n" RESET, pontos);
+    printf(AMARELO "\nSua pontuacao final: %d/%d\n" RESET, pontos, QUESTOES_POR_RODADA);
 
-    if      (pontos == 5) printf(VERDE  "Excelente! Pontuação perfeita!\n" RESET);
-    else if (pontos >= 3) printf(VERDE  "Bom trabalho!\n" RESET);
-    else                  printf(VERMELHO "Continue estudando!\n" RESET);
+    if      (pontos == QUESTOES_POR_RODADA)     printf(VERDE    "Excelente! Pontuacao perfeita!\n" RESET);
+    else if (pontos >= QUESTOES_POR_RODADA / 2) printf(VERDE    "Bom trabalho!\n" RESET);
+    else                                         printf(VERMELHO "Continue estudando!\n" RESET);
 }
 
 // ============================================================
-// Roletão de Caixas
+// Roletao de Caixas
 // ============================================================
 
 void roleta_caixas() {
@@ -177,28 +267,46 @@ void roleta_caixas() {
     printf("Jogador 2 (1-7): ");
     int jogador2 = ler_inteiro(1, 7);
 
-    // Geração determinística sem rand()
-    int semente = (jogador1 + jogador2) * 1000;
-    int premio  = (semente % 5) + 1;
-    int perigo  = (semente % 4) + 1;
-    if (perigo >= premio) perigo++;
+    // Sorteio aleatorio com rand()
+    int premio = rand() % 5 + 1;
+    int perigo;
+    do {
+        perigo = rand() % 5 + 1;
+    } while (perigo == premio);
 
-    int vez = semente % 2;
-    printf(VERDE "\n%s começa!\n" RESET, jogadores[vez ? jogador2 - 1 : jogador1 - 1]);
+    int vez = rand() % 2;
+    printf(VERDE "\n%s comeca!\n" RESET, jogadores[vez ? jogador2 - 1 : jogador1 - 1]);
+
+    int abertas[5] = {0};
 
     while (1) {
         const char *nome_atual = jogadores[vez ? jogador2 - 1 : jogador1 - 1];
-        printf("\n%s, escolha uma caixa (1-5): ", nome_atual);
+
+        printf("\nCaixas: ");
+        for (int i = 1; i <= 5; i++) {
+            if (abertas[i - 1]) printf(VERMELHO "[%d:X] " RESET, i);
+            else                 printf(VERDE   "[%d]   " RESET, i);
+        }
+        printf("\n");
+
+        printf("%s, escolha uma caixa (1-5): ", nome_atual);
         int escolha = ler_inteiro(1, 5);
 
+        if (abertas[escolha - 1]) {
+            printf(VERMELHO "Essa caixa ja foi aberta! Escolha outra.\n" RESET);
+            continue;
+        }
+
+        abertas[escolha - 1] = 1;
+
         if (escolha == premio) {
-            printf(VERDE "PARABÉNS, %s! Você encontrou o prêmio!\n" RESET, nome_atual);
+            printf(VERDE "PARABENS, %s! Voce encontrou o premio!\n" RESET, nome_atual);
             break;
         } else if (escolha == perigo) {
-            printf(VERMELHO "PERDEU, %s! Caixa amaldiçoada!\n" RESET, nome_atual);
+            printf(VERMELHO "PERDEU, %s! Caixa amaldicada!\n" RESET, nome_atual);
             break;
         } else {
-            printf("Caixa vazia. Vez do próximo jogador!\n");
+            printf("Caixa vazia. Vez do proximo jogador!\n");
             vez = !vez;
         }
     }
@@ -229,14 +337,15 @@ void batalha_cavaleiros() {
     j1.cavaleiros[0] = j1.cavaleiros[1] = 10;
     j2.cavaleiros[0] = j2.cavaleiros[1] = 10;
 
-    int turno = 0;
+    int turno = rand() % 2;
+    printf(VERDE "\n%s comeca a batalha!\n" RESET, turno ? j2.nome : j1.nome);
 
     while (1) {
         Jogador *atual    = turno ? &j2 : &j1;
         Jogador *oponente = turno ? &j1 : &j2;
 
         printf(AZUL "\n--- Turno de %s ---\n" RESET, atual->nome);
-        printf("  Seus cavaleiros  : [1] %d aura | [2] %d aura\n",
+        printf("  Seus cavaleiros    : [1] %d aura | [2] %d aura\n",
                atual->cavaleiros[0], atual->cavaleiros[1]);
         printf("  Cavaleiros inimigos: [1] %d aura | [2] %d aura\n",
                oponente->cavaleiros[0], oponente->cavaleiros[1]);
@@ -252,9 +361,9 @@ void batalha_cavaleiros() {
             int defensor = ler_inteiro(1, 2);
 
             if (atual->cavaleiros[atacante - 1] <= 0) {
-                printf(VERMELHO "Esse cavaleiro foi derrotado e não pode atacar!\n" RESET);
+                printf(VERMELHO "Esse cavaleiro foi derrotado e nao pode atacar!\n" RESET);
             } else {
-                int dano = (atacante + defensor) % 3 + 2;
+                int dano = rand() % 5 + 2; // dano aleatorio entre 2 e 6
                 oponente->cavaleiros[defensor - 1] -= dano;
                 printf(VERMELHO "%d de dano causado ao cavaleiro %d de %s!\n" RESET,
                        dano, defensor, oponente->nome);
@@ -273,7 +382,7 @@ void batalha_cavaleiros() {
             int destino = ler_inteiro(1, 2);
 
             if (origem == destino) {
-                printf(VERMELHO "Origem e destino não podem ser o mesmo cavaleiro!\n" RESET);
+                printf(VERMELHO "Origem e destino nao podem ser o mesmo cavaleiro!\n" RESET);
             } else if (atual->cavaleiros[origem - 1] <= 1) {
                 printf(VERMELHO "Aura insuficiente para transferir!\n" RESET);
             } else {
@@ -288,7 +397,7 @@ void batalha_cavaleiros() {
             printf("Cavaleiro para meditar (1-2): ");
             int cavaleiro = ler_inteiro(1, 2);
 
-            int recuperacao = (cavaleiro + turno) % 2 + 3;
+            int recuperacao = rand() % 4 + 3; // recuperacao aleatoria entre 3 e 6
             atual->cavaleiros[cavaleiro - 1] += recuperacao;
             printf(AMARELO "Cavaleiro %d recuperou %d de aura!\n" RESET,
                    cavaleiro, recuperacao);
@@ -308,9 +417,9 @@ void batalha_cavaleiros() {
 // ============================================================
 
 int mostrar_menu() {
-    printf(AZUL "\n╔══════════════════╗\n" RESET);
-    printf(AZUL "║   MENU PRINCIPAL  ║\n" RESET);
-    printf(AZUL "╚══════════════════╝\n" RESET);
+    printf(AZUL "\n+==================+\n" RESET);
+    printf(AZUL "|  MENU PRINCIPAL  |\n" RESET);
+    printf(AZUL "+==================+\n" RESET);
     printf("  1. Quiz de Engenharia\n");
     printf("  2. Roletao de Caixas\n");
     printf("  3. Batalha de Cavaleiros\n");
@@ -325,6 +434,7 @@ int mostrar_menu() {
 
 int main() {
     setlocale(LC_ALL, "");
+    srand((unsigned int)time(NULL)); // inicializa semente aleatoria com o tempo atual
 
     printf(AMARELO "Bem-vindo ao sistema de jogos!\n" RESET);
 
@@ -336,7 +446,7 @@ int main() {
             case 2: roleta_caixas();      break;
             case 3: batalha_cavaleiros(); break;
             case 4:
-                printf(VERDE "\nAté logo!\n" RESET);
+                printf(VERDE "\nAte logo!\n" RESET);
                 return 0;
         }
 
