@@ -1,6 +1,6 @@
 # Trabalho-Prog
 
-🎮 Mini Game Collection
+🎮 Mini Games 
 📖 Introdução
 
 Mini Game de três mini jogos desenvolvidos com o objetivo de proporcionar entretenimento rápido e desafiador, explorando diferentes estilos de gameplay: conhecimento, estratégia e tomada de decisão.
