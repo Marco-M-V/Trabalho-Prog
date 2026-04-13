@@ -74,3 +74,5 @@ Interação via terminal
 👨‍💻 Autores
 Raphael Castro - Marco Matheus;
 Projeto desenvolvido para fins acadêmicos e prática de programação.
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+Observaçao: Foi Utilizado neste codigo a ferramenta de assistencia e preenchimento automatico do VsCode e o Copilot.
