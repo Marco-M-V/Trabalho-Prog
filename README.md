@@ -49,14 +49,7 @@ Sistema de evolução por fúria
 Mecânica de divisão de unidades
 Combates estratégicos
 
-🎯 Objetivo do Projeto
 
-O projeto foi criado para:
-
-Praticar conceitos de programação e lógica;
-Explorar diferentes mecânicas de jogos em um único sistema;
-Desenvolver criatividade e design de gameplay;
-Proporcionar uma experiência divertida e educativa.
 
 🚀 Como Jogar
 
