@@ -394,7 +394,7 @@
 	            printf("Reiniciando entrada 3...\n");
 	        continue;
 	        } else {
-	            printf("Opcao invalida!\n")
+	            printf("Opcao invalida!\n");
 	        }
 	    }
 	 }
