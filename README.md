@@ -6,8 +6,8 @@
 Mini Game de três mini jogos desenvolvidos com o objetivo de proporcionar entretenimento rápido e desafiador, explorando diferentes estilos de gameplay: conhecimento, estratégia e tomada de decisão.
 Cada jogo apresenta mecânicas únicas e uma proposta diferente, garantindo variedade e diversão ao jogador.
 
-
-1. Pergunta e Resposta
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+? Pergunta e Resposta
 
 Neste jogo de perguntas e respostas, o computador apresenta uma questão acompanhada de quatro alternativas.
 O objetivo do jogador é selecionar a resposta correta utilizando raciocínio lógico e conhecimento geral.
@@ -17,7 +17,7 @@ Sistema de múltipla escolha
 Perguntas variadas
 Feedback imediato ao jogador
 Desafio de conhecimento e atenção
-
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 🐍 Cobra na Caixa!
 
 A história se passa dentro de uma antiga tumba egípcia, onde dois exploradores ficaram presos e precisam tomar decisões arriscadas para sobreviver.
@@ -30,7 +30,7 @@ Ambientação temática egípcia
 Suspense e tomada de decisão
 Mecânica baseada em risco e probabilidade
 Experiência rápida e imprevisível
-
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 ⚔️ Gousmas War
 
 Em Gousmas War, os jogadores entram em um jogo de estratégia onde controlam criaturas chamadas Gousmas.
@@ -50,7 +50,7 @@ Mecânica de divisão de unidades
 Combates estratégicos
 
 
-
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 🚀 Como Jogar
 
 Execute o programa principal, com seu executador favorito, ex: Falcon C++ ou Visual Studio Code;
@@ -60,7 +60,7 @@ Escolha um dos mini jogos disponíveis no menu.
 Siga as instruções exibidas na tela.
 
 Divirta-se!
-
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 🛠️ Tecnologias Utilizadas
 
 Linguagem C
@@ -70,7 +70,7 @@ Lógica de programação
 Estruturas condicionais e de repetição
 
 Interação via terminal
-
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 👨‍💻 Autores
 Raphael Castro - Marco Matheus;
 Projeto desenvolvido para fins acadêmicos e prática de programação.
